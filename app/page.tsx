@@ -1,91 +1,133 @@
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from './page.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import Hello from "../data/hello.mdx";
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
+    <main className={"divide-y divide-gray-200 dark:divide-gray-700"}>
+      <div className='pt-6 pb-8 space-y-2 md:space-y-5'>
+        <h1 className='text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14'>
+          Latest
+        </h1>
+        <p className='text-lg leading-7 text-textMuted'>
+          React, TIL등을 작성하는 기술블로그
         </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
+        <li className='py-12'>
+          <article>
+            <div className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
+              <dl>
+                <dt className='sr-only'>Published on</dt>
+                <dd className='text-base font-medium leading-6 text-textMuted'>
+                  <time dateTime='2022-01-28T00:00:00.000Z'>
+                    2023년 2월 3일
+                  </time>
+                </dd>
+              </dl>
+              <div className='space-y-5 xl:col-span-3'>
+                <div className='space-y-6'>
+                  <div>
+                    <h2 className='text-2xl font-bold leading-8 tracking-tight'>
+                      <a className='text-gray-900 dark:text-gray-100' href='#'>
+                        최대공약수와 최소공배수
+                      </a>
+                    </h2>
+                    <div className='flex flex-wrap'>
+                      <a
+                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
+                        href='#'
+                      >
+                        algorithm
+                      </a>
+                      <a
+                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
+                        href='#'
+                      >
+                        math
+                      </a>
+                      <a
+                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
+                        href='#'
+                      >
+                        programmers
+                      </a>
+                    </div>
+                  </div>
+                  <div className='prose text-gray-500 max-w-none dark:text-gray-400'></div>
+                  <a
+                    className='prose text-gray-500 max-w-none dark:text-gray-400'
+                    aria-label='Read "최대공약수와 최소공배수"'
+                    href='#'
+                  >
+                    <div className='prose text-textMuted max-w-none'>
+                      최대공약수와 최소공배수
+                    </div>
+                  </a>
+                </div>
+                <div className='text-base font-medium leading-6'></div>
+              </div>
+            </div>
+          </article>
+        </li>
+        <li className='py-12'>
+          <article>
+            <div className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
+              <dl>
+                <dt className='sr-only'>Published on</dt>
+                <dd className='text-base font-medium leading-6 text-textMuted'>
+                  <time dateTime='2022-01-28T00:00:00.000Z'>
+                    2023년 2월 3일
+                  </time>
+                </dd>
+              </dl>
+              <div className='space-y-5 xl:col-span-3'>
+                <div className='space-y-6'>
+                  <div>
+                    <h2 className='text-2xl font-bold leading-8 tracking-tight'>
+                      <a className='text-gray-900 dark:text-gray-100' href='#'>
+                        피보나치수열
+                      </a>
+                    </h2>
+                    <div className='flex flex-wrap'>
+                      <a
+                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
+                        href='#'
+                      >
+                        algorithm
+                      </a>
+                      <a
+                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
+                        href='#'
+                      >
+                        math
+                      </a>
+                      <a
+                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
+                        href='#'
+                      >
+                        programmers
+                      </a>
+                    </div>
+                  </div>
+                  <div className='prose text-gray-500 max-w-none dark:text-gray-400'></div>
+                  <a
+                    className='prose text-gray-500 max-w-none dark:text-gray-400'
+                    aria-label='Read "최대공약수와 최소공배수"'
+                    href='#'
+                  >
+                    <div className='prose text-textMuted max-w-none'>
+                      피보나치수열
+                    </div>
+                  </a>
+                </div>
+                <div className='text-base font-medium leading-6'></div>
+              </div>
+            </div>
+          </article>
+        </li>
+      </ul>
     </main>
-  )
+  );
 }
