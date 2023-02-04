@@ -1,9 +1,24 @@
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import Hello from "../data/hello.mdx";
+import { getAllFilesFrontMatter } from "@/util/mdx";
+import { formatLong, stringToDate } from "@/util/date";
+import { parseISO, toDate } from "date-fns";
+import Link from "next/link";
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+interface Post {
+  title: string;
+  date: string;
+  tags: string[];
+  draft: boolean;
+  summary: string;
+  slug: string;
+}
+export default async function Home() {
+  const posts: Post[] = await getAllFilesFrontMatter("menu");
+  const mutatedPosts = posts.filter((post: any) => post.date !== null);
+  console.log(posts.filter((post: any) => post.date !== null));
   return (
     <main className={"divide-y divide-gray-200 dark:divide-gray-700"}>
       <div className='pt-6 pb-8 space-y-2 md:space-y-5'>
@@ -15,118 +30,58 @@ export default function Home() {
         </p>
       </div>
       <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
-        <li className='py-12'>
-          <article>
-            <div className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
-              <dl>
-                <dt className='sr-only'>Published on</dt>
-                <dd className='text-base font-medium leading-6 text-textMuted'>
-                  <time dateTime='2022-01-28T00:00:00.000Z'>
-                    2023년 2월 3일
-                  </time>
-                </dd>
-              </dl>
-              <div className='space-y-5 xl:col-span-3'>
-                <div className='space-y-6'>
-                  <div>
-                    <h2 className='text-2xl font-bold leading-8 tracking-tight'>
-                      <a className='text-gray-900 dark:text-gray-100' href='#'>
-                        최대공약수와 최소공배수
-                      </a>
-                    </h2>
-                    <div className='flex flex-wrap'>
-                      <a
-                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
-                        href='#'
-                      >
-                        algorithm
-                      </a>
-                      <a
-                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
-                        href='#'
-                      >
-                        math
-                      </a>
-                      <a
-                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
-                        href='#'
-                      >
-                        programmers
-                      </a>
+        {mutatedPosts.map(({ title, summary, date, tags, slug }) => (
+          <li className='py-12' key={slug}>
+            <article>
+              <div className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
+                <dl>
+                  <dt className='sr-only'>Published on</dt>
+                  <dd className='text-base font-medium leading-6 text-textMuted'>
+                    <time dateTime='2022-01-28T00:00:00.000Z'>
+                      {formatLong(new Date(date))}
+                    </time>
+                  </dd>
+                </dl>
+                <div className='space-y-5 xl:col-span-3'>
+                  <div className='space-y-6'>
+                    <div>
+                      <h2 className='text-2xl font-bold leading-8 tracking-tight'>
+                        <Link
+                          className='text-gray-900 dark:text-gray-100'
+                          href={slug}
+                        >
+                          {title}
+                        </Link>
+                      </h2>
+                      <div className='flex flex-wrap'>
+                        {tags.map((tag) => (
+                          <a
+                            key={tag}
+                            className='mr-3 text-sm font-medium uppercase text-inlineTitle'
+                            href='#'
+                          >
+                            {tag}
+                          </a>
+                        ))}
+                      </div>
                     </div>
+                    <div className='prose text-gray-500 max-w-none dark:text-gray-400'></div>
+                    <a
+                      className='prose text-gray-500 max-w-none dark:text-gray-400'
+                      aria-label='Read "최대공약수와 최소공배수"'
+                      href='#'
+                    >
+                      <div className='prose text-textMuted max-w-none'>
+                        {summary}
+                      </div>
+                    </a>
                   </div>
-                  <div className='prose text-gray-500 max-w-none dark:text-gray-400'></div>
-                  <a
-                    className='prose text-gray-500 max-w-none dark:text-gray-400'
-                    aria-label='Read "최대공약수와 최소공배수"'
-                    href='#'
-                  >
-                    <div className='prose text-textMuted max-w-none'>
-                      최대공약수와 최소공배수
-                    </div>
-                  </a>
+                  <div className='text-base font-medium leading-6'></div>
                 </div>
-                <div className='text-base font-medium leading-6'></div>
               </div>
-            </div>
-          </article>
-        </li>
-        <li className='py-12'>
-          <article>
-            <div className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
-              <dl>
-                <dt className='sr-only'>Published on</dt>
-                <dd className='text-base font-medium leading-6 text-textMuted'>
-                  <time dateTime='2022-01-28T00:00:00.000Z'>
-                    2023년 2월 3일
-                  </time>
-                </dd>
-              </dl>
-              <div className='space-y-5 xl:col-span-3'>
-                <div className='space-y-6'>
-                  <div>
-                    <h2 className='text-2xl font-bold leading-8 tracking-tight'>
-                      <a className='text-gray-900 dark:text-gray-100' href='#'>
-                        피보나치수열
-                      </a>
-                    </h2>
-                    <div className='flex flex-wrap'>
-                      <a
-                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
-                        href='#'
-                      >
-                        algorithm
-                      </a>
-                      <a
-                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
-                        href='#'
-                      >
-                        math
-                      </a>
-                      <a
-                        className='mr-3 text-sm font-medium uppercase text-inlineTitle'
-                        href='#'
-                      >
-                        programmers
-                      </a>
-                    </div>
-                  </div>
-                  <div className='prose text-gray-500 max-w-none dark:text-gray-400'></div>
-                  <a
-                    className='prose text-gray-500 max-w-none dark:text-gray-400'
-                    aria-label='Read "최대공약수와 최소공배수"'
-                    href='#'
-                  >
-                    <div className='prose text-textMuted max-w-none'>
-                      피보나치수열
-                    </div>
-                  </a>
-                </div>
-                <div className='text-base font-medium leading-6'></div>
-              </div>
-            </div>
-          </article>
-        </li>
+            </article>
+          </li>
+        ))}
       </ul>
     </main>
   );

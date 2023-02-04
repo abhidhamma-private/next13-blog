@@ -1,12 +1,16 @@
+import fs from "fs";
 import "./globals.css";
 import logo from "../asset/logo.png";
 import Image from "next/image";
 import { HamburgerIcon } from "@/asset/svg/HamburgerIcon";
+import path from "path";
+import { getMenuList } from "@/util/files";
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const menuList = getMenuList();
   return (
     <html lang='en'>
       <head />
@@ -18,15 +22,16 @@ export default function RootLayout({
             <div className='h-10 text-2xl font-semibold grid grid-flow-col items-center grid-cols-[1fr_2fr]'>
               {/* 로고 */}
               <div className='sm:grid justify-start grid-flow-col items-center gap-1'>
-                <Image className='w-8' src={logo} alt='' />
+                <Image className='w-7' src={logo} alt='' />
                 <div className='hidden sm:grid'>지속가능한개발</div>
               </div>
               {/* 메뉴 */}
               <div className='hidden text-textMuted sm:grid grid-flow-col justify-between'>
-                <div>Basic</div>
-                <div>Tags</div>
-                <div>Projects</div>
-                <div>About</div>
+                {[menuList[1], menuList[3], menuList[2], menuList[0]].map(
+                  (menuName: string) => (
+                    <div key={menuName}>{menuName}</div>
+                  )
+                )}
               </div>
               <div className='grid sm:hidden justify-end'>
                 <button className='sm:grid w-8 h-8 rounded'>
@@ -68,8 +73,8 @@ export default function RootLayout({
                     className='h-6 w-6 fill-textNormal'
                   >
                     <path
-                      fill-rule='evenodd'
-                      clip-rule='evenodd'
+                      fillRule='evenodd'
+                      clipRule='evenodd'
                       d='M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.607 9.607 0 0 1 12 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48 3.97-1.32 6.833-5.054 6.833-9.458C22 6.463 17.522 2 12 2Z'
                     ></path>
                   </svg>
