@@ -1,11 +1,9 @@
 import Image from "next/image";
-import { Inter } from "@next/font/google";
 import Hello from "../data/hello.mdx";
 import { getAllFilesFrontMatter } from "@/util/mdx";
 import { formatLong, stringToDate } from "@/util/date";
 import { parseISO, toDate } from "date-fns";
 import Link from "next/link";
-const inter = Inter({ subsets: ["latin"] });
 
 interface Post {
   title: string;
@@ -15,10 +13,11 @@ interface Post {
   summary: string;
   slug: string;
 }
+
 export default async function Home() {
   const posts: Post[] = await getAllFilesFrontMatter("menu");
   const mutatedPosts = posts.filter((post: any) => post.date !== null);
-  console.log(posts.filter((post: any) => post.date !== null));
+  // console.log(posts.filter((post: any) => post.date !== null));
   return (
     <main className={"divide-y divide-gray-200 dark:divide-gray-700"}>
       <div className='pt-6 pb-8 space-y-2 md:space-y-5'>
@@ -30,7 +29,7 @@ export default async function Home() {
         </p>
       </div>
       <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
-        {mutatedPosts.map(({ title, summary, date, tags, slug }) => (
+        {mutatedPosts.map(({ slug, date, title, summary, tags }) => (
           <li className='py-12' key={slug}>
             <article>
               <div className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>

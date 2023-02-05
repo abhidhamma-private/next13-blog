@@ -1,35 +1,43 @@
-import fs from "fs";
 import "./globals.css";
 import logo from "../asset/logo.png";
 import Image from "next/image";
 import { HamburgerIcon } from "@/asset/svg/HamburgerIcon";
-import path from "path";
 import { getMenuList } from "@/util/files";
+import Link from "next/link";
+import { Inter } from "@next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const menuList = getMenuList();
+  console.log("menuList", menuList);
   return (
-    <html lang='en'>
+    <html lang='en' className={inter.className}>
       <head />
       <body className='antialiased text-black bg-white dark:bg-backgroundPrimary dark:text-textNormal'>
         {/* 가운데 */}
         <div className='max-w-3xl px-4 mx-auto sm:px-6 xl:max-w-5xl xl:px-0 h-screen'>
           {/* 헤더 */}
           <div className='grid items-center pt-10'>
-            <div className='h-10 text-2xl font-semibold grid grid-flow-col items-center grid-cols-[1fr_2fr]'>
+            <div className='h-10 font-semibold grid grid-flow-col items-center grid-cols-[6fr_4fr]'>
               {/* 로고 */}
-              <div className='sm:grid justify-start grid-flow-col items-center gap-1'>
+              <div className='sm:grid text-2xl justify-start grid-flow-col items-center gap-1'>
                 <Image className='w-7' src={logo} alt='' />
-                <div className='hidden sm:grid'>지속가능한개발</div>
+                <Link className='hidden sm:grid' href={"/"}>
+                  지속가능한개발
+                </Link>
               </div>
               {/* 메뉴 */}
               <div className='hidden text-textMuted sm:grid grid-flow-col justify-between'>
                 {[menuList[1], menuList[3], menuList[2], menuList[0]].map(
                   (menuName: string) => (
-                    <div key={menuName}>{menuName}</div>
+                    <Link key={menuName} href={`blog/${menuName}`}>
+                      {menuName}
+                    </Link>
                   )
                 )}
               </div>
