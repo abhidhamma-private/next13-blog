@@ -1,6 +1,9 @@
 import { getAllFilesFrontMatter, getFileBySlug } from "@/util/mdx";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Suspense } from "react";
+
+const MDXRemotes: any = MDXRemote;
+
 export async function generateStaticParams() {
   const posts = await getAllFilesFrontMatter("menu");
 
@@ -19,9 +22,10 @@ export default async function Page({ params }: any) {
     decodeURIComponent(params.slug.join("/"))
   );
   console.log(post);
+
   return (
     <Suspense fallback={<>Loading...</>}>
-      <MDXRemote source={post} />
+      <MDXRemotes source={post} />
     </Suspense>
   );
 }
