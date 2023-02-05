@@ -71,81 +71,83 @@ export async function getAllFilesFrontMatter(folder: any) {
   return allFrontMatter.sort((a: any, b: any) => dateSortDesc(a.date, b.date));
 }
 
-// export async function getFileBySlug(type: string, slug: string) {
-//   const mdxPath = path.join(root, "data", type, `${slug}.mdx`);
-//   const mdPath = path.join(root, "data", type, `${slug}.md`);
-//   const source = fs.existsSync(mdxPath)
-//     ? fs.readFileSync(mdxPath, "utf8")
-//     : fs.readFileSync(mdPath, "utf8");
+export async function getFileBySlug(type: string, slug: string) {
+  const mdxPath = path.join(root, "data", type, `${slug}.mdx`);
+  const mdPath = path.join(root, "data", type, `${slug}.md`);
+  const source = fs.existsSync(mdxPath)
+    ? fs.readFileSync(mdxPath, "utf8")
+    : fs.readFileSync(mdPath, "utf8");
 
-//   // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
-//   if (process.platform === "win32") {
-//     process.env.ESBUILD_BINARY_PATH = path.join(
-//       root,
-//       "node_modules",
-//       "esbuild",
-//       "esbuild.exe"
-//     );
-//   } else {
-//     process.env.ESBUILD_BINARY_PATH = path.join(
-//       root,
-//       "node_modules",
-//       "esbuild",
-//       "bin",
-//       "esbuild"
-//     );
-//   }
+  // // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
+  // if (process.platform === "win32") {
+  //   process.env.ESBUILD_BINARY_PATH = path.join(
+  //     root,
+  //     "node_modules",
+  //     "esbuild",
+  //     "esbuild.exe"
+  //   );
+  // } else {
+  //   process.env.ESBUILD_BINARY_PATH = path.join(
+  //     root,
+  //     "node_modules",
+  //     "esbuild",
+  //     "bin",
+  //     "esbuild"
+  //   );
+  // }
 
-//   let toc: any = [];
+  // let toc: any = [];
 
-//   const { code, frontmatter } = await bundleMDX({
-//     source,
-//     // mdx imports can be automatically source from the components directory
-//     cwd: path.join(root, "components"),
+  // const { code, frontmatter } = await bundleMDX({
+  //   source,
+  //   // mdx imports can be automatically source from the components directory
+  //   cwd: path.join(root, "components"),
 
-//     mdxOptions(options: any, frontmatter: any): any {
-//       // this is the recommended way to add custom remark/rehype plugins:
-//       // The syntax might look weird, but it protects you in case we add/remove
-//       // plugins in the future.
-//       options.remarkPlugins = [
-//         ...(options.remarkPlugins ?? []),
-//         remarkExtractFrontmatter,
-//         [remarkTocHeadings, { exportRef: toc }],
-//         remarkGfm,
-//         remarkCodeTitles,
-//         [remarkFootnotes, { inlineNotes: true }],
-//         remarkMath,
-//         remarkImgToJsx,
-//       ];
-//       options.rehypePlugins = [
-//         ...(options.rehypePlugins ?? []),
-//         rehypeSlug,
-//         rehypeAutolinkHeadings,
-//         rehypeKatex,
-//         [rehypeCitation, { path: path.join(root, "data") }],
-//         [rehypePrismPlus, { ignoreMissing: true }],
-//         rehypePresetMinify,
-//       ];
-//       return options;
-//     },
-//     esbuildOptions: (options) => {
-//       options.loader = {
-//         ...options.loader,
-//         ".js": "jsx",
-//       };
-//       return options;
-//     },
-//   });
+  //   mdxOptions(options: any, frontmatter: any): any {
+  //     // this is the recommended way to add custom remark/rehype plugins:
+  //     // The syntax might look weird, but it protects you in case we add/remove
+  //     // plugins in the future.
+  //     options.remarkPlugins = [
+  //       ...(options.remarkPlugins ?? []),
+  //       remarkExtractFrontmatter,
+  //       [remarkTocHeadings, { exportRef: toc }],
+  //       remarkGfm,
+  //       remarkCodeTitles,
+  //       [remarkFootnotes, { inlineNotes: true }],
+  //       remarkMath,
+  //       remarkImgToJsx,
+  //     ];
+  //     options.rehypePlugins = [
+  //       ...(options.rehypePlugins ?? []),
+  //       rehypeSlug,
+  //       rehypeAutolinkHeadings,
+  //       rehypeKatex,
+  //       [rehypeCitation, { path: path.join(root, "data") }],
+  //       [rehypePrismPlus, { ignoreMissing: true }],
+  //       rehypePresetMinify,
+  //     ];
+  //     return options;
+  //   },
 
-//   return {
-//     mdxSource: code,
-//     toc,
-//     frontMatter: {
-//       readingTime: readingTime(code),
-//       slug: slug || null,
-//       fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
-//       ...frontmatter,
-//       date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
-//     },
-//   };
-// }
+  //   esbuildOptions: (options) => {
+  //     options.loader = {
+  //       ...options.loader,
+  //       ".js": "jsx",
+  //     };
+  //     return options;
+  //   },
+  // });
+
+  // return {
+  //   mdxSource: code,
+  //   toc,
+  //   frontMatter: {
+  //     readingTime: readingTime(code),
+  //     slug: slug || null,
+  //     fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
+  //     ...frontmatter,
+  //     date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
+  //   },
+  // };
+  return source;
+}
