@@ -25,7 +25,7 @@ export default async function Home() {
           Latest
         </h1>
         <p className='text-lg leading-7 text-textMuted'>
-          React, TIL등을 작성하는 기술블로그
+          학습한것을 정리하는 블로그
         </p>
       </div>
       <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
