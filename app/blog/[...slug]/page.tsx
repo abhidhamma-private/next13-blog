@@ -5,11 +5,16 @@ import { Suspense } from "react";
 const MDXRemotes: any = MDXRemote;
 
 export async function generateStaticParams() {
+  console.log("generateStaticParams");
   const posts = await getAllFilesFrontMatter("menu");
 
+  console.log(
+    posts.map((post: any) => ({
+      slug: ["blog", post.slug],
+    }))
+  );
   return posts.map((post: any) => ({
     slug: ["blog", post.slug],
-    data: post.slug,
   }));
 }
 
@@ -19,7 +24,9 @@ export default async function Page({ params }: any) {
 
   const post = await getFileBySlug(
     "menu",
-    decodeURIComponent(params.slug.join("/"))
+    decodeURIComponent(
+      params.slug.filter((item: any) => item !== "blog").join("/")
+    )
   );
   console.log(post);
 
